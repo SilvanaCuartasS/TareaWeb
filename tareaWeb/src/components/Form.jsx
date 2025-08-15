@@ -1,4 +1,6 @@
 import { useState } from "react";
+import './Form.css';
+
 
 const Form = () => {
     const [taskInput, setTaskInput] = useState('');
@@ -38,7 +40,7 @@ const Form = () => {
             </form>
 
             <div>
-                <label>Filtrar por prioridad:</label>
+                <label>Filtrar por prioridad: </label>
                 <select value={filterPriority} onChange={(e) => setFilterPriority(e.target.value)}>
                     <option value="all">Todas</option>
                     <option value="low">Baja</option>
@@ -48,11 +50,13 @@ const Form = () => {
             </div>
 
             {filteredTasks.length > 0 && filteredTasks.map((task, index) => (
-                <div key={index}>
-                    <li>{task.title} - {task.priority}</li>
-                    <button onClick={() => handleDelete(index)}>Delete</button>
-                </div>
-            ))}
+            <div key={index} className="task-item">
+            <span className={`priority ${task.priority}`}>{task.priority}</span>
+            <span>{task.title}</span>
+            <button className="delete-btn" onClick={() => handleDelete(index)}>Delete</button>
+            </div>
+))}
+
         </>
     );
 };
